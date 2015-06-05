@@ -57,6 +57,8 @@ attiny84at1.bootloader.low_fuses=0x62
 attiny84at1.bootloader.high_fuses=0xD7
 attiny84at1.bootloader.extended_fuses=0xFF
 attiny84at1.bootloader.file=empty/empty84at1.hex
+attiny84at1.bootloader.tool=arduino:avrdude
+attiny84at1.upload.tool=arduino:avrdude
 
 attiny84at1.build.mcu=attiny84
 attiny84at1.build.f_cpu=1000000L
