@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-zip -r arduino-tiny.zip tiny
+rm -f arduino-tiny.zip
+zip -r arduino-tiny.zip NettigoTinyBrd
