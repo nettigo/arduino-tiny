@@ -1,7 +1,7 @@
 ###########################################################################
 ###########################################################################
 
-attiny84at8.name=ATtiny84 @ 8 MHz  (internal oscillator; BOD disabled)
+attiny84at8.name=Nettigo TinyBrd at 8 MHz
 
 # The following do NOT work...
 # attiny84at8.upload.using=avrispv2
@@ -34,7 +34,7 @@ attiny84at8.build.core=tiny
 ###########################################################################
 ###########################################################################
 
-attiny84at1.name=ATtiny84 @ 1 MHz  (internal oscillator; BOD disabled)
+attiny84at1.name=Nettigo TinyBrd at 1 MHz
 
 # The following do NOT work...
 # attiny84at1.upload.using=avrispv2
