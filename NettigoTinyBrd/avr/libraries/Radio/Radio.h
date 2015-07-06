@@ -317,16 +317,18 @@ public:
   struct RadioLost txDataLost()
   {
     struct RadioLost radiolost;
-    uint8_t reg = _protocol.registerRead(0x08);
-    radiolost.lost = reg >> 4;
-    radiolost.retr = reg & 0x0f;
+    struct NRFResponse response = _protocol.registerRead(0x08);
+    uint8_t registerValue = response.value;
+    radiolost.lost = registerValue >> 4;
+    radiolost.retr = registerValue & 0x0f;
     return radiolost;
   }
 
   uint8_t rxSignalStrength()
   {
-    uint8_t ssi = _protocol.registerRead(0x09);
-    return ssi;
+    struct NRFResponse response = _protocol.registerRead(0x09);
+    uint8_t registerValue = response.value;
+    return registerValue;
   }
 };
 
