@@ -8,10 +8,10 @@
 template <typename T>
 uint16_t storageWrite(const uint16_t address, T &t)
 {
-  uint8_t *data = (uint8_t*) &t;
+  void *data = (void *) &t;
   uint16_t dataSize = sizeof(T);
-  uint8_t *eeprom_ptr;
-  eeprom_ptr = address;
+  void *eeprom_ptr;
+  eeprom_ptr = (void *) address;
   eeprom_update_block(data, eeprom_ptr, dataSize);
   return dataSize;
 }
@@ -19,10 +19,10 @@ uint16_t storageWrite(const uint16_t address, T &t)
 template <typename T>
 uint16_t storageRead(const uint16_t address, T &t)
 {
-  uint8_t *data = (uint8_t*) &t;
+  void *data = (void *) &t;
   uint16_t dataSize = sizeof(T);
-  uint8_t *eeprom_ptr;
-  eeprom_ptr = address;
+  void *eeprom_ptr;
+  eeprom_ptr = (void *) address;
   eeprom_read_block(data, eeprom_ptr, dataSize);
   return dataSize;
 }
