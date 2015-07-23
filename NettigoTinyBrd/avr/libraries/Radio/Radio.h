@@ -8,8 +8,8 @@
 #define RADIO_SENT 1
 #define RADIO_LOST 0
 
-#define RADIO_BLOCK 0
-#define RADIO_NONBLOCK 1
+#define RADIO_BLOCK 1
+#define RADIO_NONBLOCK 0
 
 struct NRFResponse
 {
@@ -402,7 +402,7 @@ public:
     do
     {
       status = device.txStatus();
-    } while (blocking && status != RADIO_WAITS);
+    } while (blocking && status == RADIO_WAITS);
     return status;
   }
 
