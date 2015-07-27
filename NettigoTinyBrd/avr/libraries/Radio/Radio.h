@@ -255,6 +255,7 @@ public:
   uint8_t txStatus()
   {
     uint8_t status = _protocol.commandWrite0(0xff);
+    delayMicroseconds(200);
     if (bitRead(status, 4))
     {
       return RADIO_LOST;
