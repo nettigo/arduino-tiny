@@ -2,6 +2,7 @@
 ###########################################################################
 
 attiny84at8.name=Nettigo TinyBrd @ 8 MHz
+attiny84at8.upload.speed=2
 
 # The following do NOT work...
 # attiny84at8.upload.using=avrispv2
@@ -20,8 +21,8 @@ attiny84at8.upload.maximum_size=8192
 # Preserve EEPROM memory through the Chip Erase cycle; [EESAVE=0]
 
 
-attiny84at8.bootloader.tool=arduino:avrdude
-attiny84at8.upload.tool=arduino:avrdude
+attiny84at8.bootloader.tool=NettigoTinyBrd:avrdude
+attiny84at8.upload.tool=NettigoTinyBrd:avrdude
 attiny84at8.bootloader.low_fuses=0xE2
 attiny84at8.bootloader.high_fuses=0xD7
 attiny84at8.bootloader.extended_fuses=0xFF
