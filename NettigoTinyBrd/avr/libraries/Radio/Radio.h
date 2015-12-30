@@ -11,6 +11,7 @@
 #define RADIO_BLOCK 1
 #define RADIO_NONBLOCK 0
 
+#define RADIO_MAX_WAITING 150
 struct NRFResponse
 {
   uint8_t status;
@@ -400,10 +401,12 @@ public:
   uint8_t flush(uint8_t blocking=RADIO_BLOCK)
   {
     uint8_t status = RADIO_WAITS;
+    uint8_t cnt = 0;
     do
     {
       status = device.txStatus();
-    } while (blocking && status == RADIO_WAITS);
+    } while (blocking && cnt++ < RADIO_MAX_WAITING && status == RADIO_WAITS);
+    if (cnt >= RADIO_MAX_WAITING) { status = RADIO_LOST; }
     return status;
   }
 
