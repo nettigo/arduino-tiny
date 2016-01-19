@@ -10,7 +10,7 @@ tinyBrd8.upload.maximum_data_size=512
 tinyBrd8.upload.protocol=usbasp
 
 
-tinyBrd8.bootloader.tool=ntgdude
+tinyBrd8.bootloader.tool=avrdude1
 tinyBrd8.bootloader.low_fuses=0xE2
 tinyBrd8.bootloader.high_fuses=0xD7
 tinyBrd8.bootloader.extended_fuses=0xFF
