@@ -46,7 +46,10 @@ static void powerOff(const uint8_t sleep_time=SLEEP_8S)
 
 static void powerOn()
 {
-  clock_prescale_set(clock_div_1);
+  if (F_CPU == 1000000UL)
+    clock_prescale_set(clock_div_8);
+  else
+    clock_prescale_set(clock_div_1);
   
   wdt_disable();
   
