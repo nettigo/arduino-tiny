@@ -26,7 +26,7 @@ uint32_t batteryRead()
   ADCSRA |= _BV(ADSC);
   while (bit_is_set(ADCSRA,ADSC));
   result = ADCL;
-  result |= ADCH<<8;
+  result |= _BV(ADCH);
   result = 1126400L / result;
   return result;
 }
@@ -36,11 +36,11 @@ static void powerOff(const uint8_t sleep_time=SLEEP_8S)
   wdt_enable(sleep_time);
   WDTCSR |= _BV(WDIE);
   
-  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
-  
-  clock_prescale_set(clock_div_256);
+  ADCSRA &= ~_BV(ADEN);
   power_all_disable();
   
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+  clock_prescale_set(clock_div_256);
   sleep_mode();
 }
 
@@ -56,6 +56,7 @@ static void powerOn()
   sleep_disable();
   
   power_all_enable();
+  ADCSRA |= _BV(ADEN);
 }
 
 void sleep(uint32_t sleepTime)
