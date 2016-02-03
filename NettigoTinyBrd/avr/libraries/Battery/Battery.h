@@ -26,7 +26,7 @@ uint32_t batteryRead()
   ADCSRA |= _BV(ADSC);
   while (bit_is_set(ADCSRA,ADSC));
   result = ADCL;
-  result |= _BV(ADCH);
+  result |= ADCH << 8;
   result = 1126400L / result;
   return result;
 }
