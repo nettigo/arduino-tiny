@@ -4,4 +4,4 @@
 *~
 *.zip
 .project
-avr-gcc-header
+avr-gcc-headers
