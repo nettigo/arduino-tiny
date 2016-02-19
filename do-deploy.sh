@@ -13,10 +13,16 @@ done
 echo "OK? (y/n)"
 read confirm
 
+host="static.nettigo.pl"
+
 if [ "$confirm" = "y" ]; then
 	for i in *.zip; do
 		name=`basename $i .zip`
-		scp $name.zip static.nettigo.pl:NTG-STATIC/$name-$ans.zip
+		scp $name.zip ${host}:NTG-STATIC/$name-$ans.zip
+		ssh -C $host "cd NTG-STATIC/
+		rm tinyBrd-current.zip
+		ln -s $name-$ans.zip tinyBrd-current.zip
+		"
 	done
 
 fi
