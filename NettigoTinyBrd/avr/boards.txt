@@ -7,7 +7,7 @@ tinyBrd8.name=Nettigo TinyBrd @ 8 MHz
 tinyBrd8.upload.tool=avrdude1
 tinyBrd8.upload.maximum_size=8192
 tinyBrd8.upload.maximum_data_size=512
-tinyBrd8.upload.protocol=usbasp
+#tinyBrd8.upload.protocol=usbasp
 
 
 tinyBrd8.bootloader.tool=avrdude1
@@ -29,7 +29,7 @@ attiny84at1.name=Nettigo TinyBrd @ 1 MHz
 attiny84at1.upload.tool=avrdude1
 attiny84at1.upload.maximum_size=8192
 attiny84at1.upload.maximum_data_size=512
-attiny84at1.upload.protocol=usbasp
+#attiny84at1.upload.protocol=usbasp
 
 
 attiny84at1.bootloader.low_fuses=0x62
