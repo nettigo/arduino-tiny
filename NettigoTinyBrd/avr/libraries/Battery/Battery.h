@@ -18,6 +18,8 @@
 #define SLEEP_4S WDTO_4S
 #define SLEEP_8S WDTO_8S
 
+volatile static bool _is_wdt_interrupt = false;
+
 uint32_t batteryRead()
 {
   uint32_t result;
@@ -77,12 +79,15 @@ void sleep(uint32_t sleepTime)
     else if (sleepTime >= 15) { offTime = SLEEP_15MS; sleepTime -= 15; }
 
     powerOff(offTime);
+    if (!_is_wdt_interrupt)
+        break;
   }
   powerOn();
 }
 
 ISR (WDT_vect)
 {
+    _is_wdt_interrupt = true;
 }
 
 #endif
