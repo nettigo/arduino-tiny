@@ -80,8 +80,9 @@ void sleep(uint32_t sleepTime)
 
     powerOff(offTime);
     if (!_is_wdt_interrupt)
-      _is_wdt_interrupt = false;
       break;
+      
+    _is_wdt_interrupt = false;
   }
   powerOn();
 }
