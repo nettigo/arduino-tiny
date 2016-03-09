@@ -20,8 +20,8 @@ if [ "$confirm" = "y" ]; then
 		name=`basename $i .zip`
 		scp $name.zip ${host}:NTG-STATIC/$name-$ans.zip
 		ssh -C $host "cd NTG-STATIC/
-		rm tinyBrd-current.zip
-		ln -s $name-$ans.zip tinyBrd-current.zip
+		rm tinyBrdCore-current.zip
+		ln -s $name-$ans.zip tinyBrdCore-current.zip
 		"
 	done
 
