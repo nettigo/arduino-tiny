@@ -61,9 +61,10 @@ static void powerOn()
   ADCSRA |= _BV(ADEN);
 }
 
-void sleep(uint32_t sleepTime)
+bool sleep(uint32_t sleepTime)
 {
   uint8_t offTime;
+  bool time_elapsed = true;
 
   while (sleepTime > 15)
   {
@@ -80,11 +81,16 @@ void sleep(uint32_t sleepTime)
 
     powerOff(offTime);
     if (!_is_wdt_interrupt)
+    {
+      time_elapsed = false;
       break;
-      
+    }
+
     _is_wdt_interrupt = false;
   }
   powerOn();
+
+  return time_elapsed;
 }
 
 ISR (WDT_vect)
