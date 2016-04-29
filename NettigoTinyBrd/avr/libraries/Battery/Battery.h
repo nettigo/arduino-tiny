@@ -33,17 +33,8 @@ uint32_t batteryRead()
   return result;
 }
 
-static void powerOff(const uint8_t sleep_time=SLEEP_8S)
-{
-  wdt_enable(sleep_time);
-  WDTCSR |= _BV(WDIE);
-  
-  ADCSRA &= ~_BV(ADEN);
-  power_all_disable();
-  
-  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
-  clock_prescale_set(clock_div_256);
-  sleep_mode();
+//procedure taken from ATtiny84a datasheet
+void disable_wdt(void) {
   cli();
   wdt_reset();
   /* Clear WDRF in MCUSR */
@@ -53,11 +44,26 @@ static void powerOff(const uint8_t sleep_time=SLEEP_8S)
   /* Turn off WDT */
   WDTCSR = 0x00;
   sei();
+
+}
+
+static void powerOff(const uint8_t sleep_time=SLEEP_8S)
+{
+  wdt_enable(sleep_time);
+  WDTCSR |= _BV(WDIE);
+
+  ADCSRA &= ~_BV(ADEN);
+  power_all_disable();
+  
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+  clock_prescale_set(clock_div_256);
+  sleep_mode();
+  disable_wdt();
 }
 
 static void powerOn()
 {
-	if (F_CPU == 1000000UL)
+  if (F_CPU == 1000000UL)
     clock_prescale_set(clock_div_8);
   else
     clock_prescale_set(clock_div_1);
@@ -99,6 +105,19 @@ bool sleep(uint32_t sleepTime)
 
   return time_elapsed;
 }
+
+void deepSleep() {
+
+  ADCSRA &= ~_BV(ADEN);
+  power_all_disable();
+
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+  clock_prescale_set(clock_div_256);
+  sleep_mode();
+  disable_wdt();
+  powerOn();
+}
+
 
 ISR (WDT_vect)
 {
