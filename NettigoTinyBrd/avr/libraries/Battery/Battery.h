@@ -114,10 +114,9 @@ void deepSleep() {
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);
   clock_prescale_set(clock_div_256);
   sleep_mode();
-  disable_wdt();
   powerOn();
+//  disable_wdt();
 }
-
 
 ISR (WDT_vect)
 {
