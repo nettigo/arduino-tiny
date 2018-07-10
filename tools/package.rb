@@ -4,6 +4,7 @@ require 'rubygems'
 
 require 'json'
 require 'pp'
+require 'open-uri'
 
 
 require 'optparse'
@@ -66,6 +67,19 @@ def get_tool_dependencies(ver = '1.6.11')
   # pp package['toolsDependencies']
 end
 
+def find_version(current, ver)
+  current["packages"][0]["platforms"].each_with_index { |p, i|
+    if p['architecture']=='avr' && p['version'] == ver
+      return i
+    end
+  }
+  return nil
+end
+
+def get_current_index
+  JSON.load(open('http://static.nettigo.pl/tinybrd/package_nettigo.pl_index.json'))
+end
+
 platform_entry = {
     name: 'Nettigo tinyBrd',
     architecture: 'avr',
@@ -85,7 +99,11 @@ platform_entry = {
 
 }
 
-packages_data = {
+packages_data = get_current_index
+
+idx = find_version(packages_data,options[:version])
+
+packages_data ||= {
     packages: [
         name: 'tinybrd',
         maintainer: 'Nettigo',
@@ -93,11 +111,18 @@ packages_data = {
         email: 'info@nettigo.pl',
         help: {online: 'http://akademia.nettigo.pl/tinybrd'},
         platforms: [
-            platform_entry
+
         ],
         tools: [],
     ]
 }
+
+if idx.nil?
+  packages_data["packages"][0]["platforms"] << platform_entry
+else
+  packages_data["packages"][0]["platforms"][idx] = platform_entry
+end
+
 puts JSON.generate(packages_data)
 
 
