@@ -5,6 +5,7 @@ require 'rubygems'
 require 'json'
 require 'pp'
 require 'open-uri'
+require 'net/http'
 
 
 require 'optparse'
@@ -55,8 +56,8 @@ options = Optparse.parse(ARGV)
 raise "Podaj plik z archiwum" if options[:file].nil? || options[:file].empty?
 raise "Podaj wersję którą wygenerować" if options[:version].nil? || options[:version].empty?
 
-def get_tool_dependencies(ver = '1.6.11')
-  arduino_json_path ="#{ENV['HOME']}/arduino-1.6.9/dist/package_index.json"
+def get_tool_dependencies(ver = '1.6.15')
+  arduino_json_path ="#{ENV['HOME']}/programy/arduino-1.6.13/hardware/package_index_bundled.json"
   data = File.read(arduino_json_path)
 
   js= JSON.parse(data)
@@ -65,6 +66,7 @@ def get_tool_dependencies(ver = '1.6.11')
   }.first
   return {} if package.empty?
   # pp package['toolsDependencies']
+  package['toolsDependencies']
 end
 
 def find_version(current, ver)
@@ -77,7 +79,7 @@ def find_version(current, ver)
 end
 
 def get_current_index
-  JSON.load(open('http://static.nettigo.pl/tinybrd/package_nettigo.pl_index.json'))
+  JSON.load(Net::HTTP.get(URI.parse('http://static.nettigo.pl/tinybrd/package_nettigo.pl_index.json')))
 end
 
 platform_entry = {
@@ -123,6 +125,6 @@ else
   packages_data["packages"][0]["platforms"][idx] = platform_entry
 end
 
-puts JSON.generate(packages_data)
+puts JSON.pretty_generate(packages_data)
 
 

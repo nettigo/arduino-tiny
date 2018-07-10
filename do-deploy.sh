@@ -5,12 +5,30 @@
 BASENAME="tinyBrdCore"
 BOARD_MANAGER_SUFFIX="bm"
 
-echo "Tagi z GITa:"
-echo
-git tag
-echo "---------"
-echo "Podaj numer wersji. Będzie częscią pliku"
-read ans
+while getopts "h?t:" opt; do
+    case "$opt" in
+    h|\?)
+        exit 0
+        ;;
+    t) ans=$OPTARG
+        ;;
+    esac
+done
+
+
+if [ $ans ]; then
+    echo "Nazwa wersji: $ans"
+    echo "Nacisnij <ENTER> by kontynuować"
+    read 
+else
+    echo "Tagi z GITa:"
+    echo
+    git tag
+    echo "---------"
+    echo "Podaj numer wersji. Będzie częscią pliku"
+    read ans
+fi
+
 
 BM_DIRECTORY="$BASENAME-$BOARD_MANAGER_SUFFIX-$ans"
 LIB="$BASENAME-$ans".zip
