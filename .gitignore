@@ -6,3 +6,4 @@
 .project
 avr-gcc-headers
 .idea
+.vscode
