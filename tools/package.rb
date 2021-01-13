@@ -57,7 +57,7 @@ raise "Podaj plik z archiwum" if options[:file].nil? || options[:file].empty?
 raise "Podaj wersję którą wygenerować" if options[:version].nil? || options[:version].empty?
 
 def get_tool_dependencies(ver = '1.6.15')
-  arduino_json_path ="#{ENV['HOME']}/programy/arduino-1.6.13/hardware/package_index_bundled.json"
+  arduino_json_path ="tools/package_index_bundled.json"
   data = File.read(arduino_json_path)
 
   js= JSON.parse(data)

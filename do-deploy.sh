@@ -58,13 +58,13 @@ PACKAGE="package_nettigo.pl_index.json"
 if [ "$confirm" = "y" ]; then
     ruby tools/package.rb -f $BM_DIRECTORY.zip -v $ans > $PACKAGE
 
-    scp $LIB ${host}:NTG-STATIC/tinybrd/cores/$LIB
-    scp $BM_DIRECTORY.zip ${host}:NTG-STATIC/tinybrd/cores/$BM_DIRECTORY.zip
-    scp $PACKAGE ${host}:NTG-STATIC/tinybrd/
-    ssh -C $host "cd NTG-STATIC/
-    rm tinyBrd-current.zip
-    ln -s tinybrd/cores/$LIB tinyBrd-current.zip
-    "
+#    scp $LIB ${host}:NTG-STATIC/tinybrd/cores/$LIB
+#    scp $BM_DIRECTORY.zip ${host}:NTG-STATIC/tinybrd/cores/$BM_DIRECTORY.zip
+#    scp $PACKAGE ${host}:NTG-STATIC/tinybrd/
+#    ssh -C $host "cd NTG-STATIC/
+#    rm tinyBrd-current.zip
+#    ln -s tinybrd/cores/$LIB tinyBrd-current.zip
+#    "
 
 fi
 
