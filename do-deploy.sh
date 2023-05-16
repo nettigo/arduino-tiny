@@ -36,11 +36,11 @@ LIB="$BASENAME-$ans".zip
 echo "Katalog dla BM: $BM_DIRECTORY"
 
     rm -f *.zip
-    zip -r $LIB NettigoTinyBrd
+    zip -qr $LIB NettigoTinyBrd
     cp -fR NettigoTinyBrd $BM_DIRECTORY
     cd $BM_DIRECTORY/avr && mv * .. && cd .. && rm -fR avr && cd ..
 
-    zip -r $BM_DIRECTORY.zip $BM_DIRECTORY
+    zip -qr $BM_DIRECTORY.zip $BM_DIRECTORY
     rm -fR $BM_DIRECTORY
 
 echo "Lista plików"
